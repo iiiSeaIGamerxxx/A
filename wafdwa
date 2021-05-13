@@ -1,0 +1,128 @@
+if game.PlaceId == 6230234550 then
+    -- init
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/qwdPKKDN"))()
+local venyx = library.new("Beta", 5013109572)
+
+-- themes
+local themes = {
+Background = Color3.fromRGB(24, 24, 24),
+Glow = Color3.fromRGB(0, 0, 0),
+Accent = Color3.fromRGB(10, 10, 10),
+LightContrast = Color3.fromRGB(20, 20, 20),
+DarkContrast = Color3.fromRGB(14, 14, 14),  
+TextColor = Color3.fromRGB(255, 255, 255)
+}
+
+-- first page
+local page = venyx:addPage("Misc", 5012544693)
+local section1 = page:addSection("Section 1")
+
+section1:addButton("God Yourself", function()
+    venyx:Notify("Seal Hub V3", "Successfully godded", game.Players.LocalPlayer.Name)
+
+
+local args = {
+    [1] = game.Players.LocalPlayer.Character.Humanoid,
+    [2] = math.huge * -1,
+    [3] = 0,
+    [4] = 0
+}
+
+game:GetService("ReplicatedStorage").ACS_Engine.Eventos.Damage:FireServer(unpack(args))
+end)
+section1:addButton("Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+section1:addButton("Hide Name", function()
+    venyx:Notify("Seal Hub V3", "Your name is now hidden from other players.")
+
+game:GetService("Players").LocalPlayer.Character.Head.Team:Destroy()
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character)
+Character:WaitForChild("Head").Team:Destroy()
+end)
+end)
+
+section1:addColorPicker("ColorPicker", Color3.fromRGB(50, 50, 50))
+section1:addColorPicker("ColorPicker2")
+section1:addSlider("Slider", 0, -100, 100, function(value)
+print("Dragged", value)
+end)
+
+section1:addButton("Steal Guns", function()
+    venyx:Notify("Seal Hub V3", "You have been given the tools!")
+
+
+    for i,v in next,game.Players:GetDescendants() do
+        if v:IsA('Tool') then
+        v.Parent = game:GetService('Players').LocalPlayer.Backpack
+        end
+    end
+    end)
+
+-- second page
+local theme = venyx:addPage("Theme", 5012544693)
+local colors = theme:addSection("Colors")
+
+for theme, color in pairs(themes) do -- all in one theme changer, i know, im cool
+colors:addColorPicker(theme, color, function(color3)
+venyx:setTheme(theme, color3)
+end)
+end
+venyx:SelectPage(venyx.pages[1], true) -- no default for more freedom
+
+-- second page
+
+local page2 = venyx:addPage("Blatant O_o", 5012544693)
+local section2 = page2:addSection("O_o")
+
+section2:addButton("Kill Everyone o_o", function()
+    venyx:Notify("Seal Hub V3", "Successfully killed everyone.")
+
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    local args = {
+        [1] = v.Character.Humanoid,
+        [2] = math.huge,
+        [3] = 0,
+        [4] = 0
+    }
+    
+    game:GetService("ReplicatedStorage").ACS_Engine.Eventos.Damage:FireServer(unpack(args))
+    
+end
+end)
+
+section2:addButton("God All O_o", function()
+    venyx:Notify("Seal Hub V3", "Everyone is now godded.")
+
+
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    local args = {
+        [1] = v.Character.Humanoid,
+        [2] = math.huge * -1,
+        [3] = 0,
+        [4] = 0
+    }
+    
+    game:GetService("ReplicatedStorage").ACS_Engine.Eventos.Damage:FireServer(unpack(args))
+end
+end)
+
+section2:addButton("Make Everyone Follow You o-O", function()
+    venyx:Notify("Seal Hub V3", "Everyone will now begin to follow you.")
+
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+
+        local args = {
+            [1] = v,
+            [2] = "Follow",
+            [3] = game:GetService("Players").LocalPlayer
+        }
+        
+        game:GetService("ReplicatedStorage").CarbonEvents.TieEvent:FireServer(unpack(args))
+        end
+    end)
+
+section2:addButton("Play Music Gui", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/P5n4DAmk", true))()
+end)
+end
